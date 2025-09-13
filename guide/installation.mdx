@@ -1,88 +1,38 @@
 ---
 title: 'Installation'
-description: 'Installation'
+description: 'How to start with TRTL3 installing it'
 icon: 'terminal'
 ---
 
-## Titles
+## Requirements
 
-Best used for section headers.
+To use TRTL3 you will need Docker installed first. If you dont have it you can install by following the [Docker Docs](https://docs.docker.com/)
 
-```md
-## Titles
+If you want to have a docker-compose file you will need Docker compose installed, you can also install it by [Docker Docs](https://docs.docker.com/)
+
+Then you can go to installation guide.
+
+## Install
+
+After Install Docker you can install TRTL3 using this command:
+
+```bash
+docker run -d --name trtl3 -p 7713:7713 -e TOKEN=your_secret_token -e JOB_INTERVAL=5 nothiaki/trtl3:latest
 ```
 
-### Subtitles
+So the service will be running on `http://localhost:7713/` and you can use by REST or use SDK's.
 
-Best used for subsection headers.
+If you want to use docker compose you can add it on the file:
 
-```md
-### Subtitles
+```yaml
+services:
+
+  trtl3:
+    image: nothiaki/trtl3:latest
+    ports:
+      - 7713:7713
+    environment:
+      - TOKEN=your_token_here
+      - JOB_INTERVAL=5
 ```
 
-<Tip>
-
-Each **title** and **subtitle** creates an anchor and also shows up on the table of contents on the right.
-
-</Tip>
-
-## Text formatting
-
-We support most markdown formatting. Simply add `**`, `_`, or `~` around text to format it.
-
-| Style         | How to write it   | Result          |
-| ------------- | ----------------- | --------------- |
-| Bold          | `**bold**`        | **bold**        |
-| Italic        | `_italic_`        | _italic_        |
-| Strikethrough | `~strikethrough~` | ~strikethrough~ |
-
-You can combine these. For example, write `**_bold and italic_**` to get **_bold and italic_** text.
-
-You need to use HTML to write superscript and subscript text. That is, add `<sup>` or `<sub>` around your text.
-
-| Text Size   | How to write it          | Result                 |
-| ----------- | ------------------------ | ---------------------- |
-| Superscript | `<sup>superscript</sup>` | <sup>superscript</sup> |
-| Subscript   | `<sub>subscript</sub>`   | <sub>subscript</sub>   |
-
-## Linking to pages
-
-You can add a link by wrapping text in `[]()`. You would write `[link to google](https://google.com)` to [link to google](https://google.com).
-
-Links to pages in your docs need to be root-relative. Basically, you should include the entire folder path. For example, `[link to text](/writing-content/text)` links to the page "Text" in our components section.
-
-Relative links like `[link to text](../text)` will open slower because we cannot optimize them as easily.
-
-## Blockquotes
-
-### Singleline
-
-To create a blockquote, add a `>` in front of a paragraph.
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
-
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
-```
-
-### Multiline
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-```
-
-### LaTeX
-
-Mintlify supports [LaTeX](https://www.latex-project.org) through the Latex component.
-
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-
-```md
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-```
