@@ -4,85 +4,46 @@ description: 'Golang SDK'
 icon: 'folders'
 ---
 
-## Titles
+## Install
 
-Best used for section headers.
+First install the SDK on your project using:
 
-```md
-## Titles
+```bash
+go install github.com/blobtrtl3/trtl3-go
 ```
 
-### Subtitles
+## Config Client
 
-Best used for subsection headers.
+```go
+package main
 
-```md
-### Subtitles
+import "github.com/blobtrtl3/trtl3-go"
+
+func main() {
+	t3c := trtl3.NewClient("http://localhost:7713", "token")
+}
 ```
 
-<Tip>
+## Upload Blob
 
-Each **title** and **subtitle** creates an anchor and also shows up on the table of contents on the right.
+You can upload a blob by using a path or the blob in memory, look up:
 
-</Tip>
+```go
+// by path
+// using relative path, but you also can use the absolute path
+path := filepath.Join("your_file.png")
 
-## Text formatting
+_, err := t3c.UploadBlobByPath("imgs", path)
+if err != nil {
+	fmt.Println(err)
+	return
+}
 
-We support most markdown formatting. Simply add `**`, `_`, or `~` around text to format it.
-
-| Style         | How to write it   | Result          |
-| ------------- | ----------------- | --------------- |
-| Bold          | `**bold**`        | **bold**        |
-| Italic        | `_italic_`        | _italic_        |
-| Strikethrough | `~strikethrough~` | ~strikethrough~ |
-
-You can combine these. For example, write `**_bold and italic_**` to get **_bold and italic_** text.
-
-You need to use HTML to write superscript and subscript text. That is, add `<sup>` or `<sub>` around your text.
-
-| Text Size   | How to write it          | Result                 |
-| ----------- | ------------------------ | ---------------------- |
-| Superscript | `<sup>superscript</sup>` | <sup>superscript</sup> |
-| Subscript   | `<sub>subscript</sub>`   | <sub>subscript</sub>   |
-
-## Linking to pages
-
-You can add a link by wrapping text in `[]()`. You would write `[link to google](https://google.com)` to [link to google](https://google.com).
-
-Links to pages in your docs need to be root-relative. Basically, you should include the entire folder path. For example, `[link to text](/writing-content/text)` links to the page "Text" in our components section.
-
-Relative links like `[link to text](../text)` will open slower because we cannot optimize them as easily.
-
-## Blockquotes
-
-### Singleline
-
-To create a blockquote, add a `>` in front of a paragraph.
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
-
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
-```
-
-### Multiline
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-```
-
-### LaTeX
-
-Mintlify supports [LaTeX](https://www.latex-project.org) through the Latex component.
-
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-
-```md
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+// by path
+var data = []byte("content")
+_, err := t3c.UploadBlob("files", bytes.NewReader(data))
+if err != nil {
+  fmt.Println(err)
+  return
+}
 ```

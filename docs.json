@@ -29,6 +29,12 @@
         "icon": "boxes-stacked",
         "groups": [
           {
+            "group": "Our SDKs",
+            "pages": [
+              "sdk/introduction"
+            ]
+          },
+          {
             "group": "Languages",
             "pages": [
               "sdk/go",
