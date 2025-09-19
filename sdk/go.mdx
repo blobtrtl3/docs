@@ -92,3 +92,35 @@ if err != nil {
   return
 }
 ```
+
+## Delete Blob
+
+Delete blob using the bucket and id:
+
+```go
+_, err := t3c.DeleteBlob("bucket-name", "blob-id")
+if err != nil {
+  fmt.Println(err)
+  return
+}
+```
+
+## Download Blob
+
+Download a single blob by using
+
+```go
+reader, err := t3c.DownloadBlob("bucket-name", "blob-id")
+if err != nil {
+  fmt.Println(err)
+  return
+}
+defer reader.Close()
+
+// example: putting the content in a file
+// note: if you want to use the extension in the file you can take the blob info first before download it
+out, _ := os.Create("out")
+defer out.Close()
+
+io.Copy(out, reader)
+```
