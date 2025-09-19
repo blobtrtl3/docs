@@ -35,13 +35,58 @@ path := filepath.Join("your_file.png")
 
 _, err := t3c.UploadBlobByPath("imgs", path)
 if err != nil {
-	fmt.Println(err)
-	return
+  fmt.Println(err)
+  return
 }
 
-// by path
+// by in memory blob
 var data = []byte("content")
 _, err := t3c.UploadBlob("files", bytes.NewReader(data))
+if err != nil {
+  fmt.Println(err)
+  return
+}
+```
+
+## Find Blobs By Bucket
+
+You can find a list of blobs metadatas by a bucket name
+
+```go
+_, err := t3c.FindBlobsByBucket("bucket-name")
+if err != nil {
+  fmt.Println(err)
+  return
+}
+```
+
+## Find Unique Blob
+
+You can find a unique blob metadata by using the id and the bucket it belongs, look:
+
+```go
+_, err := t3c.FindUniqueBlob("bucket-name", "blob-id")
+if err != nil {
+  fmt.Println(err)
+  return
+}
+```
+
+## Sign Url
+
+You can create signeds urls to expose blobs by other
+clients, for a limited time interval or a unique access
+url, it garants you to havemore control about what people access, look:
+
+```go
+sign := trtl3.Signature{
+  ID: "blob-id",
+  Bucket: "bucket-name",
+  TTL: 1 * 60, // time in minutes
+  Once: true, // if true its a unique access url
+}
+
+_, err := t3c.SignUrl(sign)
 if err != nil {
   fmt.Println(err)
   return
