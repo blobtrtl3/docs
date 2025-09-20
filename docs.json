@@ -4,8 +4,8 @@
   "name": "trtl3 docs",
   "colors": {
     "primary": "#2F9E44",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "light": "#2F9E44",
+    "dark": "#2F9E44"
   },
   "favicon": "/logo/logo.svg",
   "navigation": {
