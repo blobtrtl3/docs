@@ -14,13 +14,16 @@ go install github.com/blobtrtl3/trtl3-go
 
 ## Config Client
 
+You can create a default or a custom client, take a look, if you are using the localhost and the default token just use the default client
+
 ```go
 package main
 
 import "github.com/blobtrtl3/trtl3-go"
 
 func main() {
-	t3c := trtl3.NewClient("http://localhost:7713", "token")
+	t3c := trtl3.NewDefaultClient()
+	t3cCustom := trtl3.NewDefaultClient("http://localhost:7713", "custom-token", 5)
 }
 ```
 
